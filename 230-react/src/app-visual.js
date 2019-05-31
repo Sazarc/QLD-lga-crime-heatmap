@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import {Chart} from "./canvasChart";
 import {apiLink, JWT} from "./index";
-import {Redirect} from "react-router";
 import {renderTable} from "./table";
+import {SimpleExample} from "./leaflet-map";
 
 const searchPoints = ['offence', 'age', 'year', 'area', 'gender', 'month'];
 
@@ -58,6 +58,7 @@ export function fetchData(selectOffence, selectFilters, visual){
         .then(function(result) {
             if(visual.value === 'table'){
                 //ReactDOM.render(<div/>, document.getElementById('app-visuals'));
+                console.log(result);
                 renderTable(result);
             }
             else if(visual.value === 'chart') {
@@ -67,14 +68,22 @@ export function fetchData(selectOffence, selectFilters, visual){
                 for(let x = 0; x < resultData.length; x++) {
                     let data = resultData[x];
                     if(Object.entries(data)[1][1] !== 0) {
-                        let entry = {y: Object.entries(data)[1][1], label: Object.entries(data)[0][1]}
+                        let entry = {y: Object.entries(data)[1][1], label: Object.entries(data)[0][1]};
                         values.push(entry);
                     }
                 }
                 ReactDOM.render(<Chart data={values} offence={selectOffence.value}/>, document.getElementById('app-visuals'));
             }
-            else if(visual === 'map'){
-                document.getElementById('noVisual').style.display = 'none';
+            else if(visual.value === 'map'){
+                let values = [];
+                let resultData = result["result"];
+
+                for(let x = 0; x < resultData.length; x++) {
+                    let data = resultData[x];
+                    let entry = [Object.entries(data)[2][1], Object.entries(data)[3][1], Object.entries(data)[1][1]];
+                    values.push(entry);
+                }
+                ReactDOM.render(<SimpleExample data={values} marker={result.result}/>, document.getElementById('app-visuals'));
             }
         })
         .catch(function(error){

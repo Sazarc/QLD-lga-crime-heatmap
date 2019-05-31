@@ -6,7 +6,6 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 export function renderTable(result) {
-    console.log(result.result);
     ReactDOM.render(<TableVisual data={result.result}/>, document.getElementById('app-visuals'));
 }
 
