@@ -9,7 +9,7 @@ import {BrowserRouter as Router, Link} from 'react-router-dom'
 import {Route, Redirect} from 'react-router';
 
 // export const apiLink = "https://cab230.hackhouse.sh/";
-export const apiLink = "https://localhost/";
+export const apiLink = "https://172.22.24.250/";
 
 export let JWT;
 
