@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const db = require('./database/db');
 const options = require('./knexfile');
 const knex = require('knex')(options);
 const helmet = require('helmet');
@@ -29,7 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(db);
 
 app.use((req, res, next) => {
     req.db = knex;
