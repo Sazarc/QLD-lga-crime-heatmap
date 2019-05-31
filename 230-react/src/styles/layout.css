@@ -1,0 +1,88 @@
+
+/*420 switch to mobile style*/
+
+#root{
+    padding: 0;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+#app{
+    padding: 5px;
+    height: 98%;
+}
+
+.flex-container{
+    padding-left: 0;
+    display: flex;
+    max-height: 100%;
+    padding-top: 0;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #afafaf;
+}
+
+.flex-box{
+}
+
+.flex-box > div{
+    height: 100%;
+}
+
+#flex-visual{
+    flex-grow: 4;
+}
+#flex-filters{
+    min-width: 400px;
+    max-width: 400px;
+}
+#flex-filters > div{
+     min-width: calc(100% - 10px);
+ }
+
+#app-filters{
+    padding: 5px;
+    max-width: 30vw;
+}
+
+#app-visuals{
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#chart{
+    width: 100%;
+}
+
+.filterLabel{
+    text-align: left;
+    padding: 0;
+}
+
+@media screen and ( max-width : 800px ){
+    .flex-container{
+        flex-direction: column;
+        margin: 5px;
+        max-height: unset;
+    }
+    .flex-box{
+        width: 100%;
+    }
+    #app-visuals {
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    #flex-visual{
+        flex-grow: 1;
+    }
+    #flex-filters{
+        min-width: 200px;
+        max-width: 100vw;
+    }
+
+    #app-filters{
+        padding: 5px;
+        max-width: 100vw;
+    }
+}
