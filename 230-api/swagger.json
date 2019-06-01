@@ -2,7 +2,7 @@
   "info":{
     "title":"CAB230 - Web Computing API",
     "description":"This is Samuel Holden's CAB230 server side API for final assessment",
-    "version":"1.0.0", "termsOfService":"http://swagger.io/terms/", "contact":{"email":"n10110381n@qut.edu.au"}, "license":{
+    "version":"1.0.0", "termsOfService":"http://swagger.io/terms/", "contact":{"email":"n10110381@qut.edu.au"}, "license":{
       "name":"Apache 2.0",
       "url":"http://www.apache.org/licenses/LICENSE-2.0.html" }
   },
@@ -10,6 +10,16 @@
     {"url": "https://localhost"},
     {"url": "https://172.22.24.250"}
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JsonWebToken in order to access secure search route"
+      }
+    }
+  },
   "paths": {
     "/register": {
       "post": {
@@ -212,6 +222,7 @@
             }
           }
         ],
+        "security": [{"bearerAuth": []}],
         "responses": {
           "200": {
             "description": "OK",
