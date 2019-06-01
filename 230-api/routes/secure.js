@@ -1,5 +1,4 @@
 const express = require('express');
-const mysql = require('mysql');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('../JWT/config');
@@ -12,31 +11,32 @@ router.get('/', (req, res, next) => {
         }
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
-                console.log("Invalid JWT error:", err);
-                return res.status(401).json({
+                res.status(401).json({
                     message: 'Authorization token has expired and/or is invalid'
                 });
+                console.log("Invalid or Expired token provided");
             }
             else {
                 req.db.from('users').select('*').where({email: decoded.email})
                     .then((rows) => {
-                    if(rows.length === 1){
-                        console.log(rows);
+                    if(rows.length === 1 && rows[0].email === decoded.email){
                         next();
                     }
                     else{
-                        return res.status(401).json({
+                        res.status(401).json({
                             message: 'Authorization token is invalid'
                         });
+                        console.log("User does not exist in database");
                     }
                 });
             }
         });
     }
     else {
-        return res.status(401).json({
+        res.status(401).json({
             message: 'Authorization token not supplied in header'
         });
+        console.log("Authorization token not supplied in header");
     }
 
 });
@@ -46,6 +46,9 @@ router.get('/', (req, res) => {
     req.db.from('offence_columns').select("*").where({pretty: decodeURI(req.query.offence)})
         .then((rows) => {
             let query = {};
+            if(rows[0] === undefined){
+                throw new Error("Invalid offence selected")
+            }
             let offence = rows[0].column;
             query.offence = rows[0].pretty;
     // Subquery template "(id IN (SELECT id FROM offences WHERE area IN (id=id)))"
@@ -125,11 +128,16 @@ router.get('/', (req, res) => {
                     .innerJoin('areas', 'offences.area', 'areas.area')
                     .whereRaw(filter)
                 .then((rows) => {
-                    let result = [];
-                    for (let x=0; x<rows.length; x++){
-                        result.push({LGA: rows[x].area, total: rows[x].value, lat: rows[x].lat, lng: rows[x].lng});
+                    if(rows.length > 0){
+                        let result = [];
+                        for (let x=0; x<rows.length; x++){
+                            result.push({LGA: rows[x].area, total: rows[x].value, lat: rows[x].lat, lng: rows[x].lng});
+                        }
+                        res.status(200).json({"query": query,"result" : result})
                     }
-                    res.status(200).json({"query": query,"result" : result})
+                    else{
+                        throw new Error("Error present in parameters")
+                    }
                 }).catch((err) => {
                     console.log(err);
                     res.status(400).json({Message : "Error present in parameters"})
@@ -138,7 +146,7 @@ router.get('/', (req, res) => {
             //res.json({"offences" : result})
         })
     .catch((err) => {
-        console.log(err);
+        console.log("Error present in database search", err);
         res.status(400).json({message : "You must present a valid offence to search"})
     });
 });
