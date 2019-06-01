@@ -40,7 +40,6 @@ router.post('/login', (req, res) => {
         config.secret,
         { expiresIn: '6h' }
         );
-    console.log(token);
     // return the JWT token for the future API calls
     res.status(200).json({token: token, token_type: "Bearer", expires_in: 21600, message: `Successfully logged in!`});
 });
