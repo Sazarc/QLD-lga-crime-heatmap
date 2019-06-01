@@ -11,10 +11,7 @@ export class SimpleExample extends Component{
             lat: -20.090274,
             lng: 146.463862,
             zoom: 6,
-            markers: [
-                {position: [-20.090274, 146.463862], text: "Some cool facts about QLD, ITS FULL OF CRIME"},
-                {position: [-23.090274, 146.463862], text: "Some cool facts about QLD, ITS FULL OF CRIME"},
-            ],
+            markers: [],
             addressPoints: [],
         };
     }
