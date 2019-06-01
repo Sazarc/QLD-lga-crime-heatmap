@@ -11,14 +11,9 @@ export class Leaflet extends Component{
             lat: -20.090274,
             lng: 146.463862,
             zoom: 6,
-<<<<<<< HEAD
-            markers: [],
-            addressPoints: [],
-=======
             heatmap: <div />,
             markers: [],
             addressPoints: []
->>>>>>> parent of a520129... Revert "Merge branch 'Deployment-branch'"
         };
     }
 
