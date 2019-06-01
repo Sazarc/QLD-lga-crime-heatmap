@@ -5,21 +5,11 @@ import chroma from 'chroma-js';
 import {apiLink} from "./index";
 import {fetchData} from "./app-visual";
 
+
 const searchPoints = ['offence', 'age', 'year', 'area', 'gender', 'month'];
 
 export const colourStyles = {
-    control: styles => ({
-        ...styles,
-        backgroundColor: 'white',
-        maxHeight: "25vh",
-    }),
-    valueContainer: styles => ({
-        ...styles,
-        maxHeight: "25vh",
-        overflowY: 'auto',
-        paddingBottom: '5px',
-        paddingTop: '5px'
-    }),
+    control: styles => ({ ...styles, backgroundColor: 'white' }),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
         const colour = chroma(data.colour);
         return {
