@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Chart} from "./canvasChart";
 import {apiLink, JWT} from "./index";
 import {renderTable} from "./table";
-import {SimpleExample} from "./leaflet-map";
+import {Leaflet} from "./leaflet-map";
 
 const searchPoints = ['offence', 'age', 'year', 'area', 'gender', 'month'];
 
@@ -80,10 +80,12 @@ export function fetchData(selectOffence, selectFilters, visual){
 
                 for(let x = 0; x < resultData.length; x++) {
                     let data = resultData[x];
-                    let entry = [Object.entries(data)[2][1], Object.entries(data)[3][1], Object.entries(data)[1][1]];
-                    values.push(entry);
+                    if(Object.entries(data)[1][1] > 0){
+                        let entry = [Object.entries(data)[2][1], Object.entries(data)[3][1], Object.entries(data)[1][1]];
+                        values.push(entry);
+                    }
                 }
-                ReactDOM.render(<SimpleExample data={values} marker={result.result}/>, document.getElementById('app-visuals'));
+                ReactDOM.render(<Leaflet data={values} marker={result.result}/>, document.getElementById('app-visuals'));
             }
         })
         .catch(function(error){
