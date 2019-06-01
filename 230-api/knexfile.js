@@ -4,6 +4,6 @@ module.exports = {
         host: '127.0.0.1',
         database: 'web_computing',
         user:     'root',
-        password: 'sqlmysql'
+        password: 'Cab230!'
     }
 };
