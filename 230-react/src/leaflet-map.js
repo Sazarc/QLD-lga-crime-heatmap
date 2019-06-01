@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 
-export class SimpleExample extends Component{
+export class Leaflet extends Component{
     //{LGA: "Aurukun Shire Council", total: 0, lat: -13.354875, lng: 141.729058}
 
     constructor(props) {
@@ -11,11 +11,6 @@ export class SimpleExample extends Component{
             lat: -20.090274,
             lng: 146.463862,
             zoom: 6,
-            markers: [
-                {position: [-20.090274, 146.463862], text: "Some cool facts about QLD, ITS FULL OF CRIME"},
-                {position: [-23.090274, 146.463862], text: "Some cool facts about QLD, ITS FULL OF CRIME"},
-            ],
-            addressPoints: [],
         };
     }
 
@@ -26,7 +21,6 @@ export class SimpleExample extends Component{
             console.log(this.props.marker);
             this.setState({markers: this.props.marker});
         }
-
         if(this.props.data && this.props.data !== this.state.addressPoints){
             this.setState({addressPoints: this.props.data});
         }
@@ -48,17 +42,14 @@ export class SimpleExample extends Component{
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     {this.state.markers.map((mark, idx) => {
-                        console.log(mark);
-
-                            return(
-                                <Marker key={`marker-${idx}`} position={[mark.lat, mark.lng]}>
-                                    <Popup>
-                                        <span>{mark.LGA} with {mark.total} offences</span>
-                                    </Popup>
-                                </Marker>
-                            )
-                        }
-                    )}
+                        return(
+                            <Marker key={`marker-${idx}`} position={[mark.lat, mark.lng]}>
+                                <Popup>
+                                    <span>{mark.LGA} with {mark.total} offences</span>
+                                </Popup>
+                            </Marker>
+                        )
+                    })}
                 </Map>
             </div>
         )
