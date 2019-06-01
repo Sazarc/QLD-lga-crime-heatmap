@@ -80,8 +80,10 @@ export function fetchData(selectOffence, selectFilters, visual){
 
                 for(let x = 0; x < resultData.length; x++) {
                     let data = resultData[x];
-                    let entry = [Object.entries(data)[2][1], Object.entries(data)[3][1], Object.entries(data)[1][1]];
-                    values.push(entry);
+                    if(Object.entries(data)[1][1] > 0){
+                        let entry = [Object.entries(data)[2][1], Object.entries(data)[3][1], Object.entries(data)[1][1]];
+                        values.push(entry);
+                    }
                 }
                 ReactDOM.render(<Leaflet data={values} marker={result.result}/>, document.getElementById('app-visuals'));
             }
