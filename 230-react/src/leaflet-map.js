@@ -21,11 +21,8 @@ export class Leaflet extends Component{
         const position = [this.state.lat, this.state.lng];
 
         if(this.state.markers !== this.props.marker && this.props.marker){
-            console.log(this.props.marker);
             this.setState({markers: this.props.marker});
         }
-
-        console.log(this.props.data.length);
         if(this.props.data && this.props.data !== this.state.addressPoints && this.props.data.length > 1){
             let heatmap = <HeatmapLayer
                 fitBoundsOnLoad

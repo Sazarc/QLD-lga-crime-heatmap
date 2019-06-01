@@ -1,5 +1,18 @@
+.log-out{
+    top: 5px;
+    left: calc(100vw - 55px);
+    position: absolute;
+    color: white;
+}
 
-/*420 switch to mobile style*/
+.log-out > a{
+    color: white;
+    text-decoration: none;
+}
+
+.log-out > a:hover{
+    color: #00B7FF;
+}
 
 #root{
     padding: 0;
@@ -84,5 +97,13 @@
     #app-filters{
         padding: 5px;
         max-width: 100vw;
+    }
+}
+
+@media screen and ( max-width : 590px ){
+    img{
+        width: 90vw;
+        padding: 5px;
+        height: auto;
     }
 }

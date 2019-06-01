@@ -16,6 +16,7 @@ export let JWT;
 
 function Landing(){
     document.title = 'Welcome - QLD Crime';
+    console.log(JWT);
 
     return (
         <div className="central-div" id="central-div-id">
@@ -139,11 +140,8 @@ class Login extends React.Component {
                 throw new Error("Network response was not ok.");
             })
             .then((result) => {
-                console.log(result);
                 JWT = result.token;
                 this.setState({complete: true});
-                console.log(JWT);
-                //ReactDOM.render(<Filter />, document.getElementById('root'));
             })
             .catch(function(error) {
                 console.log("There has been a problem with your fetch operation: ",error.message);
@@ -175,7 +173,7 @@ class Login extends React.Component {
         return(
             <div className="central-div" id="central-div-id">
                 <form className="form-container" onSubmit={this.handleSubmit}>
-                    <h1>Login or Register</h1>
+                    <h1>Login</h1>
                     <label htmlFor="email"><b>Email</b></label>
                     <input type="text" value={this.state.email} onChange={this.handleInputChange} placeholder="Enter Email" name='email' required />
 
@@ -210,17 +208,19 @@ function App(){
     return(
         <div id={'app'}>
             <img height={100} alt={"https://www.business.qld.gov.au/__data/assets/image/0018/39303/qg-logo-white.png"} src={"https://www.business.qld.gov.au/__data/assets/image/0018/39303/qg-logo-white.png"} />
-                <div className="flex-container" id="app-container">
-                    <div className="flex-box" id={'flex-filters'}>
-                        <div id="app-filters">
-                            <SelectOptions/>
-                        </div>
-                    </div>
-                    <div className="flex-box" id={'flex-visual'}>
-                        <div id="app-visuals">
-                        </div>
+            <div className="flex-container" id="app-container">
+                <div className="flex-box" id={'flex-filters'}>
+                    <div id="app-filters">
+                        <SelectOptions/>
                     </div>
                 </div>
+                <div className="flex-box" id={'flex-visual'}>
+                    <div id="app-visuals"/>
+                </div>
+            </div>
+            <div className={"log-out"}>
+                <Link to={'/'} onClick={() => JWT = undefined}>log out</Link>
+            </div>
         </div>
     )
 }

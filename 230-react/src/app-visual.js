@@ -8,7 +8,6 @@ import {Leaflet} from "./leaflet-map";
 const searchPoints = ['offence', 'age', 'year', 'area', 'gender', 'month'];
 
 export function fetchData(selectOffence, selectFilters, visual){
-    console.log(visual);
     const baseUrl = apiLink +"search?";
     const offence = 'offence='+encodeURIComponent(selectOffence.value);
 
@@ -58,7 +57,6 @@ export function fetchData(selectOffence, selectFilters, visual){
         .then(function(result) {
             if(visual.value === 'table'){
                 //ReactDOM.render(<div/>, document.getElementById('app-visuals'));
-                console.log(result);
                 renderTable(result);
             }
             else if(visual.value === 'chart') {
