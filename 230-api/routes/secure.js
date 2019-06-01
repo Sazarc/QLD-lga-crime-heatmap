@@ -12,15 +12,16 @@ router.get('/', (req, res, next) => {
         }
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
+                console.log("Invalid JWT error:", err);
                 return res.status(401).json({
                     message: 'Authorization token has expired and/or is invalid'
                 });
             }
             else {
-                console.log(decoded);
                 req.db.from('users').select('*').where({email: decoded.email})
                     .then((rows) => {
                     if(rows.length === 1){
+                        console.log(rows);
                         next();
                     }
                     else{

@@ -6,7 +6,7 @@ let config = require('../JWT/config');
 
 router.post('/login', (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-        res.status(400).json({message: `Error - you must supply both email and password`});
+        res.status(401).json({message: `Error - you must supply both email and password`});
         console.log(`Error on request body:`, JSON.stringify(req.body));
     } else {
         let password = req.body.password;
@@ -28,7 +28,7 @@ router.post('/login', (req, res, next) => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log("Error on database query:", error);
                 res.status(401).json({message: 'User credentials don\'t match any of our records'});
             })
         }
@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
         );
     console.log(token);
     // return the JWT token for the future API calls
-    res.status(200).json({token: token, token_type: "Bearer", expires_in: 21600, message: `successfully logged in!`});
+    res.status(200).json({token: token, token_type: "Bearer", expires_in: 21600, message: `Successfully logged in!`});
 });
 
 router.post('/register', (req, res) => {
@@ -67,8 +67,7 @@ router.post('/register', (req, res) => {
     }
 });
 
-
-/* GET offences*/
+/* GET requests*/
 router.get('/offences', function(req, res) {
     req.db.from('offence_columns').select("pretty")
         .then((rows) => {

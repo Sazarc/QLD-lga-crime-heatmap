@@ -7,7 +7,8 @@
       "url":"http://www.apache.org/licenses/LICENSE-2.0.html" }
   },
   "servers":[
-    {"url": "https://localhost" }
+    {"url": "https://localhost"},
+    {"url": "https://172.22.24.250"}
   ],
   "paths": {
     "/register": {
@@ -16,7 +17,7 @@
           "Authentication"
         ],
         "summary": "Register a new user account",
-        "description": "Registers a new account, this is the starting point",
+        "description": "Registers a new account, for use of the secure search route",
         "requestBody": {
           "required": true,
           "content": {
@@ -78,6 +79,7 @@
     "/login": {
       "post": {
         "summary": "Login with an existing user account",
+        "description": "Login to an existing account, in order to use the secure search route",
         "requestBody": {
           "required": true,
           "content": {
@@ -108,7 +110,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "access_token": {
+                    "token": {
                       "type": "string",
                       "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1NTg1MTc1MTgsImV4cCI6MTU1ODUxNzUzOH0.F2fjmSUq1p3e1kyOefm8tHSNoZDhND5KYm1HWJIytAE"
                     },
@@ -122,7 +124,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Logged in successfully!"
+                      "example": "Successfully logged in!"
                     }
                   }
                 }
