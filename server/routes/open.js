@@ -18,16 +18,16 @@ router.post('/login', (req, res, next) => {
                         next();
                     }
                     else{
-                        throw new Error("Incorrect password");
+                        res.status(401).json({message: 'invalid login - bad password'});
                     }
                 }
                 else{
-                    throw new Error("User doesn't exist")
+                    res.status(401).json({message: "oh no! It looks like that user doesn't exist..."});
                 }
             })
             .catch(error => {
                 console.log("Error on database query:", error);
-                res.status(401).json({message: 'invalid login - bad password'});
+                res.status(500).json({message: 'oh no! It looks like there was a database error while performing your search, give it another try...'});
             })
         }
 });
