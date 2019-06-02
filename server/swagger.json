@@ -127,9 +127,12 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxNTA3MiwiZW1haWwiOiJkZW1vLXVzZXJAZ21haWwuY29tIn0sImlhdCI6MTU1OTQ3NjgzNywiZXhwIjoxNTU5NTYzMjM3fQ.zLSnD_XE2GV50hhT57xki5mzbH4Awai_D8FLTvpga00"},
                                         "access_token": {
                                             "type": "string",
-                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1Nzg2LCJlbWFpbCI6ImRlbW8xMjM0QGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTUzMjQ2MDIsImV4cCI6MTU1NTQxMTAwMn0.mo85iKuAQ_h8n8-6pkeNNs5CCnV0G8hScxhi_ml_Q6c"
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxNTA3MiwiZW1haWwiOiJkZW1vLXVzZXJAZ21haWwuY29tIn0sImlhdCI6MTU1OTQ3NjgzNywiZXhwIjoxNTU5NTYzMjM3fQ.zLSnD_XE2GV50hhT57xki5mzbH4Awai_D8FLTvpga00"
                                         },
                                         "token_type": {
                                             "type": "string",
@@ -302,6 +305,22 @@
                                         "message": {
                                             "type": "string",
                                             "example": "oh no! it looks like your authorization token is invalid..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "oh no! It looks like there was a database error while performing your search, give it another try..."
                                         }
                                     }
                                 }
