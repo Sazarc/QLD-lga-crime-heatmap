@@ -1,14 +1,22 @@
-{ "openapi":"3.0.0",
-    "info":{
-        "title":"CAB230 - Web Computing API",
-        "description":"This is Samuel Holden's CAB230 server side API for final assessment",
-        "version":"1.0.0", "termsOfService":"http://swagger.io/terms/", "contact":{"email":"n10110381@qut.edu.au"}, "license":{
-            "name":"Apache 2.0",
-            "url":"http://www.apache.org/licenses/LICENSE-2.0.html" }
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CAB230 - Web Computing API",
+        "description": "This is Samuel Holden's CAB230 server side API for final assessment",
+        "version": "1.0.0",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "samueljamesterbio.holden@connect.qut.edu.au"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
     },
-    "servers":[
-        {"url": "https://localhost"},
-        {"url": "https://172.22.24.250"}
+    "servers": [
+        {
+            "url": "https://localhost"
+        }
     ],
     "components": {
         "securitySchemes": {
@@ -26,8 +34,8 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "Register a new user account",
-                "description": "Registers a new account, for use of the secure search route",
+                "summary": "Registers a new user account",
+                "description": "This is your starting point.",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -38,12 +46,12 @@
                                     "email": {
                                         "type": "string",
                                         "required": true,
-                                        "example": "user@gmail.com"
+                                        "example": "demo-user@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "required": true,
-                                        "example": "userPassword"
+                                        "example": "demouserpassword"
                                     }
                                 }
                             }
@@ -60,7 +68,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Account successfully created!"
+                                            "example": "yay! you've successfully registered your user account :)"
                                         }
                                     }
                                 }
@@ -76,7 +84,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Error - User already exists"
+                                            "example": "oops! It looks like that user already exists :("
                                         }
                                     }
                                 }
@@ -89,7 +97,6 @@
         "/login": {
             "post": {
                 "summary": "Login with an existing user account",
-                "description": "Login to an existing account, in order to use the secure search route",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -100,12 +107,12 @@
                                     "email": {
                                         "type": "string",
                                         "required": true,
-                                        "example": "user@gmail.com"
+                                        "example": "demo-user@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "required": true,
-                                        "example": "userPassword"
+                                        "example": "demouserpassword"
                                     }
                                 }
                             }
@@ -120,21 +127,17 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "token": {
+                                        "access_token": {
                                             "type": "string",
-                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QiLCJpYXQiOjE1NTg1MTc1MTgsImV4cCI6MTU1ODUxNzUzOH0.F2fjmSUq1p3e1kyOefm8tHSNoZDhND5KYm1HWJIytAE"
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1Nzg2LCJlbWFpbCI6ImRlbW8xMjM0QGdtYWlsLmNvbSJ9LCJpYXQiOjE1NTUzMjQ2MDIsImV4cCI6MTU1NTQxMTAwMn0.mo85iKuAQ_h8n8-6pkeNNs5CCnV0G8hScxhi_ml_Q6c"
                                         },
                                         "token_type": {
                                             "type": "string",
                                             "example": "Bearer"
                                         },
                                         "expires_in": {
-                                            "type": "integer",
-                                            "example": 21600
-                                        },
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Successfully logged in!"
+                                            "type": "intager",
+                                            "example": 86400
                                         }
                                     }
                                 }
@@ -150,7 +153,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "User credentials do not match any of our records"
+                                            "example": "invalid login - bad password"
                                         }
                                     }
                                 }
@@ -209,7 +212,7 @@
                         "description": "List of comma-separated Years to filter search results by",
                         "required": false,
                         "schema": {
-                            "type": "integer"
+                            "type": "intager"
                         }
                     },
                     {
@@ -218,11 +221,15 @@
                         "description": "List of comma-separated Months to filter search results by (1-12)",
                         "required": false,
                         "schema": {
-                            "type": "integer"
+                            "type": "intager"
                         }
                     }
                 ],
-                "security": [{"bearerAuth": []}],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -250,7 +257,7 @@
                                                         "example": "Aurukun Shire Council"
                                                     },
                                                     "total": {
-                                                        "type": "integer",
+                                                        "type": "intager",
                                                         "example": 4
                                                     },
                                                     "lat": {
@@ -278,7 +285,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "You must present a valid offence to search"
+                                            "example": "oops! it looks like you're missing the offence query parm"
                                         }
                                     }
                                 }
@@ -294,7 +301,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Authorization token has expired and/or is invalid"
+                                            "example": "oh no! it looks like your authorization token is invalid..."
                                         }
                                     }
                                 }
