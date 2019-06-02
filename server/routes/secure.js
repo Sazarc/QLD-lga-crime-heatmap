@@ -144,7 +144,7 @@ router.get('/', (req, res) => {
                     }
                 }).catch((err) => {
                     console.log(err);
-                    res.status(400).json({Message : "Error present in parameters"})
+                    res.status(500).json({message : "Error present in parameters"})
             })
 
             //res.json({"offences" : result})

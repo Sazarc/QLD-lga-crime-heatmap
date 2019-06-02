@@ -75,7 +75,7 @@ router.get('/offences', function(req, res) {
             res.status(200).json({"offences" : result}) })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({"Error" : true, "Message" : "Error in MySQL query"}) })
+            res.status(400).json({"Error" : true, "message" : "Error in MySQL query"}) })
 });
 
 router.get('/areas', function(req, res) {
@@ -88,7 +88,7 @@ router.get('/areas', function(req, res) {
             res.status(200).json({"areas" : result}) })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({"Error" : true, "Message" : "Error in MySQL query"}) })
+            res.status(400).json({"Error" : true, "message" : "Error in MySQL query"}) })
 });
 
 router.get('/ages', function(req, res) {
@@ -101,7 +101,7 @@ router.get('/ages', function(req, res) {
             res.status(200).json({"ages" : result}) })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({"Error" : true, "Message" : "Error in MySQL query"})
+            res.status(400).json({"Error" : true, "message" : "Error in MySQL query"})
         })
 });
 
@@ -116,7 +116,7 @@ router.get('/genders', function(req, res) {
         })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({"Error" : true, "Message" : "Error in MySQL query"});
+            res.status(400).json({"Error" : true, "message" : "Error in MySQL query"});
         })
 });
 
@@ -130,7 +130,7 @@ router.get('/years', function(req, res) {
             res.status(200).json({"years" : result}) })
         .catch((err) => {
             console.log(err);
-            res.status(400).json({"Error" : true, "Message" : "Error in MySQL query"}) })
+            res.status(400).json({"Error" : true, "message" : "Error in MySQL query"}) })
 });
 
 module.exports = router;
