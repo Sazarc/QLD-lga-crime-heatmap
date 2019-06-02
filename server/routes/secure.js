@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
     }
     else {
         res.status(401).json({
-            message: 'Authorization token not supplied in header'
+            message: 'oops! it looks like you\'re missing the authorization header'
         });
         console.log("Authorization token not supplied in header");
     }
@@ -43,6 +43,10 @@ router.get('/', (req, res, next) => {
 
 router.get('/', (req, res) => {
     // REMOVE / at end of param .replace(new RegExp('\/$'), '')
+    if(!req.query.offence){
+        res.status(400).json({message : "oops! it looks like you're missing the offence query parm"})
+    }
+
     req.db.from('offence_columns').select("*").where({pretty: decodeURI(req.query.offence)})
         .then((rows) => {
             let query = {};
@@ -147,7 +151,7 @@ router.get('/', (req, res) => {
         })
     .catch((err) => {
         console.log("Error present in database search", err);
-        res.status(400).json({message : "You must present a valid offence to search"})
+        res.status(500).json({message : "oh no! It looks like there was a database error while performing your search, give it another try..."})
     });
 });
 

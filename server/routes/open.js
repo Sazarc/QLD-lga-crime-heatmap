@@ -6,14 +6,13 @@ let config = require('../JWT/config');
 
 router.post('/login', (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-        res.status(401).json({message: `Error - you must supply both email and password`});
+        res.status(401).json({message: `invalid login - you need to supply both an email and password`});
         console.log(`Error on request body:`, JSON.stringify(req.body));
     } else {
         let password = req.body.password;
         req.db('users').where({email: req.body.email}).select('id', 'password')
             .then((rows) => {
                 if(rows.length === 1) {
-                    console.log(rows[0]);
                     let hash = rows[0].password;
                     if(bcrypt.compareSync(password, hash)){
                         next();
@@ -28,7 +27,7 @@ router.post('/login', (req, res, next) => {
             })
             .catch(error => {
                 console.log("Error on database query:", error);
-                res.status(401).json({message: 'User credentials don\'t match any of our records'});
+                res.status(401).json({message: 'invalid login - bad password'});
             })
         }
 });
@@ -36,15 +35,15 @@ router.post('/login', (req, res, next) => {
 router.post('/login', (req, res) => {
     let token = jwt.sign({email: req.body.email},
         config.secret,
-        { expiresIn: '6h' }
+        { expiresIn: '24h' }
         );
     // return the JWT token for the future API calls
-    res.status(200).json({token: token, token_type: "Bearer", expires_in: 21600, message: `Successfully logged in!`});
+    res.status(200).json({token: token, access_token: token, token_type: "Bearer", expires_in: 86400, message: `Successfully logged in!`});
 });
 
 router.post('/register', (req, res) => {
     if (!req.body.email || !req.body.password) {
-        res.status(400).json({message: `Error - you must supply both email and password`});
+        res.status(400).json({message: `error creating new user - you need to supply both an email and password`});
         console.log(`Error on register request body:`, JSON.stringify(req.body));
     } else {
         let salt = bcrypt.genSaltSync(10);
@@ -55,11 +54,11 @@ router.post('/register', (req, res) => {
             "password":hash };
         req.db('users').insert(credential)
             .then(_ => {
-                res.status(201).json({ "Message": `Account successfully created!`});
+                res.status(201).json({ "message": `yay! you've successfully registered your user account :)`});
                 console.log(`Successful account creation`);
             })
             .catch(error => {
-                res.status(400).json({ "Message": 'Error - User already exists'});
+                res.status(400).json({ "message": 'oops! It looks like that user already exists :('});
                 console.log(`User already exists`);
             })
     }
