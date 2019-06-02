@@ -72,8 +72,7 @@ class Register extends React.Component{
                 throw new Error("User creation failed")
                 //throw new Error('Network response was not ok');
             })
-            .then((result) => {
-                console.log(result);
+            .then(() => {
                 this.setState({complete: true})
                 // ReactDOM.render(<Login email={email} psw={psw}/>, document.getElementById('root'));
             })
