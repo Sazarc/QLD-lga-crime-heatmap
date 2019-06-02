@@ -210,7 +210,7 @@ function App(){
 
     return(
         <div id={'app'}>
-            <img height={100} alt={"https://www.business.qld.gov.au/__data/assets/image/0018/39303/qg-logo-white.png"} src={"https://www.business.qld.gov.au/__data/assets/image/0018/39303/qg-logo-white.png"} />
+            <img height={100} alt={"https://www.business.qld.gov.au/__data/assets/image/0018/39303/qg-logo-white.png"} src={"client/public/qg-logo-white.png"} />
             <div className="flex-container" id="app-container">
                 <div className="flex-box" id={'flex-filters'}>
                     <div id="app-filters">
