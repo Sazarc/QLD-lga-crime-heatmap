@@ -120,6 +120,11 @@ class Login extends React.Component {
     handleSubmit(event){
         event.preventDefault();
 
+        if(!this.state.email.match(new RegExp(".+@.+\\..+"))){
+            this.setState({apiResponse: 'That is not a valid email!'});
+            return;
+        }
+
         let text = 'email=' + this.state.email + '&password=' + this.state.psw;
 
         fetch(apiLink +"login", {
@@ -151,7 +156,6 @@ class Login extends React.Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
         this.setState({
             [name]: value
         });
