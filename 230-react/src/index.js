@@ -51,9 +51,12 @@ class Register extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-        let email = this.state.email;
-        let psw = this.state.psw;
-        let text = 'email=' + email + '&password=' + psw;
+        if(!this.state.email.match(new RegExp(".+@.+\\..+"))){
+            this.setState({apiResponse: 'That is not a valid email!'});
+            return;
+        }
+
+        let text = 'email=' + this.state.email + '&password=' + this.state.psw;
 
         fetch(apiLink +"register", {
             method: "POST",
