@@ -16,7 +16,6 @@ export let JWT;
 
 function Landing(){
     document.title = 'Welcome - QLD Crime';
-    console.log(JWT);
 
     return (
         <div className="central-div" id="central-div-id">

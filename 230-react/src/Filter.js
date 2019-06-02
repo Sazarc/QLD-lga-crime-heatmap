@@ -223,7 +223,6 @@ function construct() {
         fetch(apiLink  + searchPoints[search] + 's')
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response);
                     return response.json();
                 }
                 throw new Error("Network response was not ok.");
@@ -294,7 +293,6 @@ export class SelectOptions extends Component {
 
     render(){
         if(offenceOptions.length === 0){
-            console.log(offenceOptions);
             construct();
         }
 
